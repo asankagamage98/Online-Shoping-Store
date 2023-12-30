@@ -28,7 +28,7 @@ class Supplier extends Model
                 $nextSupplierNumber = 'SUP' . str_pad($latestSupplierNumber + 1, 3, '0', STR_PAD_LEFT);
                 $supplier->supplier_number = $nextSupplierNumber;
             } else {
-                $supplier->order_number = 'SUP001';
+                $supplier->supplier_number = 'SUP001';
             }
         });
     }

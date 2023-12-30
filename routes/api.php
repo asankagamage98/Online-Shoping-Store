@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Route;
 use App\http\Controllers\ProductController;
 use App\http\Controllers\AuthController;
 use App\http\Controllers\OrderController;
+use App\http\Controllers\CustomerController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -37,4 +38,8 @@ Route::group(['middleware' => ['auth:sanctum']],function(){
     //order api
     Route::post('/addOrder',[OrderController::class,'addOrder']);
     Route::get('/allOrders',[OrderController::class,'getAllOrder']);
+
+    //customer api
+    Route::post('/addcustomer',[CustomerController::class,'addCustomer']);
+    Route::get('/allcustomers',[CustomerController::class,'getAllCustomer']);
 });

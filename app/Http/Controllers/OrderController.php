@@ -41,5 +41,12 @@ class OrderController extends Controller
         return $order;
 
     }
+      /**
+     * search data from storage.
+     */
+    public function search(string $name)
+    {
+        return Order::where('name', 'like', '%'.$name.'%')->get();
+    }
 
 }
