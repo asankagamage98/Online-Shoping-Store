@@ -13,17 +13,21 @@ return new class extends Migration
     {
         Schema::create('products', function (Blueprint $table) {
             $table->id();
+            $table->string('product_number')->uniqid();
             $table->string('name');
-            $table->string('code');
+            $table->string('code')->uniqid();
             $table->string('price');
             $table->string('count');
             $table->string('manufacture_date');
             $table->string('expire_date');
             $table->string('description')->nullable();
+            $table->unsignedBigInteger('supplier_id'); // Change to match 'supplier_number' data type
             $table->timestamps();
+
+            // Define foreign key constraint
+            $table->foreign('supplier_id')->references('id')->on('suppliers')->onDelete('cascade');
         });
     }
-
 
     /**
      * Reverse the migrations.

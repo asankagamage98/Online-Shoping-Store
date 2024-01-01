@@ -21,7 +21,7 @@ class Supplier extends Model
         parent::boot();
 
         static::creating(function ($supplier) {
-            $latestOrder = static::latest()->first();
+            $latestSupplier = static::latest()->first();
 
             if ($latestSupplier) {
                 $latestSupplierNumber = (int) substr($latestSupplier->supplier_number, 3);

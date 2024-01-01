@@ -7,6 +7,7 @@ use App\http\Controllers\ProductController;
 use App\http\Controllers\AuthController;
 use App\http\Controllers\OrderController;
 use App\http\Controllers\CustomerController;
+use App\http\Controllers\SupplierController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -42,4 +43,8 @@ Route::group(['middleware' => ['auth:sanctum']],function(){
     //customer api
     Route::post('/addcustomer',[CustomerController::class,'addCustomer']);
     Route::get('/allcustomers',[CustomerController::class,'getAllCustomer']);
+
+    //supplier api
+    Route::post('/addsupplier',[SupplierController::class,'addSupplier']);
+    Route::get('/allsuppliers',[SupplierController::class,'getAllSupplier']);
 });

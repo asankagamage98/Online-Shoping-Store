@@ -28,6 +28,7 @@ class ProductController extends Controller
             'manufacture_date' =>'required|date',
             'expire_date' => 'required|date|after:date.manufacture_date',
             'description'=>'required|string',
+            'supplier_id' => 'required|integer' // Validate as an integer
         ]);
         return Product::create($request->all());
     }

@@ -9,16 +9,33 @@ class Product extends Model
 {
     use HasFactory;
 
+    protected $table = 'products';
+
     protected $fillable = [
-        'name',
-        'code',
-        'price',
-        'count',
-        'manufacture_date',
-        'expire_date',
-        'description'
+            'name',
+            'code',
+            'price',
+            'count',
+            'manufacture_date',
+            'expire_date',
+            'description',
+            'supplier_id'
+        ];
 
-    ];
+        protected static function boot()
+    {
+        parent::boot();
+
+        static::creating(function ($product) {
+            $latestProduct = static::latest()->first();
+
+            if ( $latestProduct) {
+                $latestProductNumber = (int) substr( $latestProduct->product_number, 3);
+                $nextProductNumber = 'PRO' . str_pad( $latestProductNumber + 1, 3, '0', STR_PAD_LEFT);
+                $product->product_number = $nextProductNumber;
+            } else {
+                $product->product_number = 'PRO001';
+            }
+        });
+    }
 }
-
-
