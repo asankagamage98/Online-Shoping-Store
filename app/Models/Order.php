@@ -4,12 +4,18 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use App\Models\Product;
+
 
 class Order extends Model
 {
     use HasFactory;
 
     protected $fillable = [
+        'orderItem',
+        'product_id',
+        'quantity',
         'orderType',
         'date',
         'time',
@@ -32,4 +38,18 @@ class Order extends Model
             }
         });
     }
+
+     /**
+     * Define the many-to-many relationship with products.
+     *
+     * @return BelongsToMany
+     */
+    public function products(): BelongsToMany
+    {
+        return $this->belongsToMany(Product::class, 'products_orders', 'order_id', 'product_id')
+                    ->withPivot('quantity')
+                    ->withTimestamps();
+    }
+
+
 }

@@ -14,6 +14,9 @@ return new class extends Migration
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
             $table->string('order_number')->unique();
+            $table->string('orderItem');
+            $table->unsignedBigInteger('product_id');
+            $table->string('quantity');
             $table->string('orderType')->nullable();
             $table->string('date');
             $table->string('time');

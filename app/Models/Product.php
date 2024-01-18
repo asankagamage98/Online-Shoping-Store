@@ -4,6 +4,9 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use App\Models\Order;
+
 
 class Product extends Model
 {
@@ -38,4 +41,18 @@ class Product extends Model
             }
         });
     }
+
+    /**
+     * Define the many-to-many relationship with orders.
+     *
+     * @return BelongsToMany
+     */
+    public function orders(): BelongsToMany
+    {
+        return $this->belongsToMany(Order::class, 'products_orders', 'product_id', 'order_id')
+                    ->withPivot('quantity')
+                    ->withTimestamps();
+    }
+
+
 }
